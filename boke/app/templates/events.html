@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block preample %} 
+	<link rel="stylesheet", href="static/css/events.css">
+{% endblock preample %}
+
+{% block content%}
+
+	<div class="create-event-form">
+		<div class="selections">
+			<label for="devices">Select Device:</label>
+			<select name="devices" id="devices">
+			{% if device_names %}
+				{% for d in device_names %}
+						<option value="{{d}}">{{d}}</option>
+				{% endfor %}
+			{% endif %}
+			</select>
+		</div>
+
+		<div class="selections">
+			<label for="triggers">Select Trigger:</label>
+			<select name="triggers" id="triggers">
+			{% if trigs %}
+				{% for trig in trigs %}
+						<option value="{{trig.id}}">{{trig}}</option>
+				{% endfor %}
+			{% endif %}
+			</select>
+		</div>
+		
+		<div class="selections">
+			<label for="actions">Select Action:</label>
+			<select name="actions" id="actions">
+			{% if acts %}
+				{% for action in acts%}
+						<option value="{{action.id}}">{{action}}</option>
+				{% endfor %}
+			{% endif %}
+			</select>
+		</div>
+
+
+		<button class="create-event-form submit" onclick="save_event()">Save</button>
+	</div>
+
+	{% if events %}
+		{% for event in events %}
+			<div class="event"> 
+				<label class="event-label" id="event-label"> {{event.label}} </label>	
+				
+				<label class="switch">
+					{% if event.is_active%}
+						<input type="checkbox" event_id={{event.id}} checked=checked  onchange="set_event(this)">
+					{% else %}
+						<input type="checkbox" event_id={{event.id}}  onchange="set_event(this)">
+					{% endif %}
+					  <span class="slider round"></span>
+				</label>
+
+
+			
+				<div class="event-device">{{event.device_name}}</div>
+				<div class="event-trigger">{{event.trigger}}</div>
+				<div class="event-action">{{event.action}}</div>
+				<button class="delete-event" event_id={{event.id}} onclick="delete_event(this)">delete</button>
+			</div>
+		{% endfor %}
+	{% endif %}
+
+	<div class="create-event"> 
+		<button onclick="display_event_form()">+</button>
+	</div>
+
+	
+
+	<script src="static/js/events.js"></script>
+{%endblock content%}
+
+
