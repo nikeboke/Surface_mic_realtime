@@ -2,9 +2,9 @@ import librosa
 import numpy as np
 
 SR = 44100
-G={"G13":0,"G24":1,"G5":2,"G67":3,"G89":4,"G1011":5}
+G={"G1":0,"G2":1,"G3":2,"G4":3,"G5":4,"G7":5}
 Gnames={value: key for key, value in G.items()}
-GArray=["G13","G24","G5","G67","G89","G1011"]
+GArray=["G1","G2","G3","G4","G5","G6"]
 
 
 def MFCCMIX(x,a,b,c):
