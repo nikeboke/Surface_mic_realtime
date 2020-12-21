@@ -5,11 +5,15 @@
 {% endblock preample %}
 
 {% block content%}
+<div class="login-area">
+	<h3 class="title">Login</h3>
 	<form action="{{ url_for('main.login') }}" method="POST">
 		<div class="row"><input type="text" id="username" name="username"placeholder="User name" minlength="4" maxlength='20' required></div>
 		<div class="row"><input type="password" id="password" name="password" placeholder="Password" minlength="4" maxlength="20" required></div>
 		<div class="row"><input type="submit" value="Log in"></div>
 	</form>
+</div>
+	
 
 {%endblock content%}
 

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- Ajax 3.x-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Ajax 3.x-->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Langar&display=swap" rel="stylesheet">
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +13,6 @@
 	
 	<link rel="icon" type='image/x-icon' href='static/images/favicon.ico'>
 	<link rel="stylesheet", href="static/css/main.css">
-	<link rel="stylesheet", href="static/css/navbar.css">
 
 	{% block preample %} {% endblock preample %}
 
@@ -23,49 +24,53 @@
 </head>
 <body>
 	<div class="wrapper">
-	<nav class="nav-main">
-		{% if current_user.is_authenticated %}
-			<div class="btn-toggle-nav" onclick="toggleNav()">
-				<div class="btn-hamb"><i class="fas fa-bars"></i></div>	
-			</div>
-		{% endif %}
-		<ul>	
-			{% if current_user.is_authenticated %}
-				<li><a class="" href="{{ url_for('main.home')}}">Home</a></li>
-				<li><a class="" href="{{ url_for('main.logout')}}">Logout</a></li>
-			{% else %}
-				<li><a class="" href="{{ url_for('main.login')}}">Login</a></li>
-				<li><a class="" href="{{ url_for('main.signup')}}">Signup</a></li>
-			{% endif %}
-		</ul>
-	</nav>
-	
-	{% if current_user.is_authenticated %}
-		<nav class="nav-sidebar">
-			<ul class="list-unstyled components">
-				<li><span>Smart Home Automation</span></li>
-				<li><a href="{{ url_for('main.events') }}">Events</a></li>
-			</ul>
-		</nav>
-	{% endif %}
-	
-	{% with messages = get_flashed_messages(with_categories=true) %}
-		{% if messages %}
-			{% for category, message in messages %}
-				<div class="alert alert-{{ category }}"> {{ message }} </div>
-			{% endfor %}
-		{% endif %}
-	{% endwith %}
-
-	<div class="content">
-		{% block content %} {% endblock content%}
+    <div class="container">
+      <div class="menu">
+        <div class="container">
+          <h1 class="title">Hand Gesture Recognition
+            <span>Ekin Böke</span>
+          </h1>
+        </div>
+        <div class="container">
+          <ul>
+            {% if current_user.is_authenticated %}
+              <li><a href="{{ url_for('main.home')}}">Home</a></li>
+              <!-- <li>
+                <a href="{{ url_for('main.events') }}">Events</a>
+              </li> -->
+            {% endif %}
+          
+            
+            <li class="account">
+              <ul>	
+                {% if current_user.is_authenticated %}
+                  <li><a href="{{ url_for('main.logout')}}">Logout</a></li>
+                {% else %}
+                  <li><a href="{{ url_for('main.login')}}">Login</a></li>
+                  <li><a href="{{ url_for('main.signup')}}">Sign Up</a></li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}"> {{ message }} </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+    
+        <div class="content">
+          {% block content %} {% endblock content%}
+        </div>
+    </div>
+ 
 	</div>
-	</div>
-
-	<script src="static/js/main.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-
-
+	<script src="static/js/main.js"></script>
 </body>
 
 	{% block postbody %}{% endblock postbody %}
